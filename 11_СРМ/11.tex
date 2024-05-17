@@ -1,0 +1,117 @@
+\documentclass[a5paper,10pt,intlimits,twoside,nohref]{vpcku}
+\usepackage{amsmath,amssymb,amsthm,delarray,enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{a4wide}
+\usepackage{amsopn}
+%\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{letterspace}
+
+
+% Correct Russian hyphenation
+\frenchspacing \righthyphenmin=2 \lefthyphenmin=2
+
+\allowdisplaybreaks
+\everymath{\displaystyle}
+
+\DeclareMathOperator*{\limit}{l.i.m.}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\spo}{sp}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathsf{E}}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\F}{\mathscr{F}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\Er}{\mathrm{E}}
+\newcommand{\Sub}{\mathrm{Sub}}
+
+\newtheorem{teo}{Теорема}%[section]
+\newtheorem{lem}{Лема}%[section]
+\newtheorem{coll}{Наслідок}%[section]
+\theoremstyle{definition}
+\newtheorem{defin}{Означення}%[section]
+\newtheorem{exa}{Приклад}%[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Зауваження}%[section]
+
+\renewcommand{\baselinestretch}{1.3}
+
+%\hfuzz7pt \voffset-1cm \hoffset-3cm \topmargin.4cm
+
+\numberwithin{equation}{section}
+\renewcommand{\thesection}{\arabic{section}}% zakommentirovat', esli nuzhno%
+\renewcommand{\theequation}{\arabic{equation}}
+%видаляє проблему з номером сторінки
+\makeatletter
+\renewcommand\chapter{
+                    \clearpage
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\begin{document}
+\renewcommand{\contentsname}{ЗМІСТ}
+{\pagestyle{empty} \tableofcontents} \pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyfoot[LE,RO]{\small \thepage} \fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+
+\newpage
+\chapter{Задачі управління проектами (СPM)}
+\section{Управління проектами з детермінованим часом виконання робіт (CPM)}
+
+\textit{Метод критичного шляху.}
+Метод СРМ (Critical Path Method) часто використовують для планування, оперативного управління та контролю за реалізацією проєктів. Прикладами таких проєктів є:
+
+1) дослідження та розробка нових продуктів і процесів,
+
+2) будівництво підприємств, будівель і споруд,
+
+3) ремонт великого і складного обладнання,
+
+4) проектування і впровадження нових систем.
+
+Метод СРМ може бути використаний для відповіді на такі запитання
+
+1) скільки часу знадобиться на виконання всього проєкту?
+
+2) у який час мають починатися і закінчуватися окремі роботи?
+
+3) які роботи є «критичними» і мають бути виконані в точно визначений графіком час, щоб не зірвати встановлені терміни виконання проєкту в цілому?
+
+4) На який час можна відкласти виконання «некритичних» робіт, щоб вони не вплинули на терміни виконання проєкту:
+
+Шлях являє собою послідовність взаємопов'язаних робіт, що веде з початкового вузла до кінцевого.
+
+Роботи, що належать найдовшому шляху, є роботами критичного шляху проєкту, а сам цей шлях називається критичним шляхом.
+
+Нехай ES - найбільш ранній час початку (earliset start) даної роботи, EF - найбільш ранній час закінчення (earliset finish) даної роботи, t - очікуваний час, необхідний для роботи.
+\[
+EF=ES+t
+\]
+
+\textit{Правило найранішого часу початку.}
+Найраніший час початку роботи, що виходить із даного вузла, дорівнює найбільшому з показників найранішого часу завершення робіт, які входять у даний вузол
+
+\textit{Правило найпізнішого часу закінчення.}
+Найпізніший час закінчення (LF - latest finis) роботи, що входить до цього вузла, дорівнює найменшому з показників найпізнішого часу початку (latest start) робіт, що виходить із цього вузла.
+
+Величина запасу часу стосовно кожної роботи обчислюється таким чином:
+
+запас \( =LS-ES=LF-EF \)
+
+Критичний шлях утворюють роботи з нульовим запасом часу.
+
+\end{document}

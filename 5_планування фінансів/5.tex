@@ -1,0 +1,252 @@
+\documentclass[a5paper,10pt,intlimits,twoside,nohref]{vpcku}
+\usepackage{amsmath,amssymb,amsthm,delarray,enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{a4wide}
+\usepackage{amsopn}
+%\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{letterspace}
+
+
+% Correct Russian hyphenation
+\frenchspacing \righthyphenmin=2 \lefthyphenmin=2
+
+\allowdisplaybreaks
+\everymath{\displaystyle}
+
+\DeclareMathOperator*{\limit}{l.i.m.}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\spo}{sp}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathsf{E}}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\F}{\mathscr{F}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\Er}{\mathrm{E}}
+\newcommand{\Sub}{\mathrm{Sub}}
+
+\newtheorem{teo}{Теорема}%[section]
+\newtheorem{lem}{Лема}%[section]
+\newtheorem{coll}{Наслідок}%[section]
+\theoremstyle{definition}
+\newtheorem{defin}{Означення}%[section]
+\newtheorem{exa}{Приклад}%[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Зауваження}%[section]
+
+\renewcommand{\baselinestretch}{1.3}
+
+%\hfuzz7pt \voffset-1cm \hoffset-3cm \topmargin.4cm
+
+\numberwithin{equation}{section}
+\renewcommand{\thesection}{\arabic{section}}% zakommentirovat', esli nuzhno%
+\renewcommand{\theequation}{\arabic{equation}}
+%видаляє проблему з номером сторінки
+\makeatletter
+\renewcommand\chapter{
+                    \clearpage
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\begin{document}
+\renewcommand{\contentsname}{ЗМІСТ}
+{\pagestyle{empty} \tableofcontents} \pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyfoot[LE,RO]{\small \thepage} \fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+
+\newpage
+\chapter{Задача планування фінансів }
+\section{Оптимальне планування фінансів}
+
+
+Розглянуті в цьому розділі завдання планування фінансів можна розв'язати засобами лінійного програмування. Їх розв'язання передбачає використання динамічних моделей. Пропоновані задачі становлять особливий інтерес, оскільки дають змогу визначити стратегії інвестицій з урахуванням ризику та деяких інших чинників.
+
+\textit{Приклад 1.}
+
+П. Датський - керівник компанії - уклав контракт на купівлю нового обладнання для консервування овочів, що обійшлося в 750 млн грн. Згідно з умовами контракту 150 млн грн. необхідно сплатити через два місяці, а решту - через шість місяців, коли обладнання буде поставлено.
+
+Щоб розплатитися повністю, управитель припускає негайно ж створити цільовий фонд, який можна використовувати для інвестицій. Оскільки такі інвестиції створять додаткову готівку на той час, коли доведеться вносити гроші за обладнання, то П. Датський знає, що йому слід відкласти щонайменше 750 млн грн. А от скільки саме - залежить від наявних можливостей інвестування.
+
+П. Датський вирішив зосередитися на 12 можливостях інвестування, представлених у такій таблиці.
+
+\begin{table}[htbp]
+	\begin{center}
+	\begin{tabular}{|c|l|c|l|}
+		\hline
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Можливі\\ інвестиції\end{tabular}} & \multirow{2}{*}{Можливі на початку}                                                                     & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}На скільки\\ місяців\end{tabular}} & \multirow{2}{*}{Процент}                                       \\
+		&                                                                                                         &                                                                               &                                                                \\ \hline
+		\begin{tabular}[c]{@{}c@{}}A\\ B\\ C\\ D\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}місяці 1, 2, 3, 4 ,5 і 6\\ місяці 1, 3, і 5\\ місяці 1 і 4\\ місяці 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}1\\ 2\\ 3\\ 6\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}1,5\\ 3,5\\ 6,0\\ 11,0\end{tabular} \\ \hline
+	\end{tabular}
+	\end{center}
+\end{table}
+
+За даних можливостей інвестування і з урахуванням необхідного графку виплат, мета П. Датського полягає в тому, щоб розробити стратегію, яка мінімізує готівкову суму, яку він повинен мати на самому початку для виплати всіх грошей за укладеним контрактком.
+\begin{table}[htb]
+	\caption{\textbf{Відомості про можливості вкладень і повернення грошей}}
+	\begin{center}
+	\begin{tabular}{|l|l|l|l|l|l|l|l|}
+		
+		\hline
+		\multicolumn{1}{|l|}{\multirow{2}{*}{Інвестиції}} & \multicolumn{7}{l|}{Початок місяця}                                                                                                                                          \\ \cline{2-8} 
+		\multicolumn{1}{|l|}{}                                           & \multicolumn{1}{l|}{1} & \multicolumn{1}{l|}{2} & \multicolumn{1}{l|}{3} & \multicolumn{1}{l|}{4} & \multicolumn{1}{l|}{5} & \multicolumn{1}{l|}{6} & \multicolumn{1}{l|}{7} \\ \hline
+		A в місяці 1                                                     & 1,00 $\rightarrow$        & 1,015                  &                        &                        &                        &                        &                        \\
+		A в місяці 2                                                     &                        & 1,00 $\rightarrow$        & 1,015                  &                        &                        &                        &                        \\
+		A в місяці 3                                                     &                        &                        & 1,00 $\rightarrow$        & 1,015                  &                        &                        &                        \\
+		A в місяці 4                                                     &                        &                        &                        & 1,00 $\rightarrow$        & 1,015                  &                        &                        \\
+		A в місяці 5                                                     &                        &                        &                        &                        & 1,00 $\rightarrow$        & 1,015                  &                        \\
+		A в місяці 6                                                     &                        &                        &                        &                        &                        & 1,00 $\rightarrow$        & 1,015                  \\
+		B в місяці 1                                                     & 1,00 $\rightarrow$        & $\rightarrow\rightarrow$            & 1,035                  &                        &                        &                        &                        \\
+		B в місяці 3                                                     &                        &                        & 1,00 $\rightarrow$        & $\rightarrow\rightarrow$            & 1,035                  &                        &                        \\
+		B в місяці 5                                                     &                        &                        &                        &                        & 1,00 $\rightarrow$        & $\rightarrow\rightarrow$            & 1,035                  \\
+		C в місяці 1                                                     & 1,00 $\rightarrow$        & $\rightarrow\rightarrow$            & $\rightarrow\rightarrow$            & 1,060                  &                        &                        &                        \\
+		C в місяці 4                                                     &                        &                        &                        & 1,00 $\rightarrow$        & $\rightarrow\rightarrow$            & $\rightarrow\rightarrow$            & 1,060                  \\
+		D в місяці 1                                                     & 1,00 $\rightarrow$        & $\rightarrow\rightarrow$            & $\rightarrow\rightarrow$            & $\rightarrow\rightarrow$            & $\rightarrow\rightarrow$            & $\rightarrow\rightarrow$            & 1,110 \\\hline                
+	\end{tabular}
+	\end{center}
+\end{table}
+
+
+\pagebreak
+\begin{center}
+	\textit{Схема балансових обмежень задачі лінійного програмування }
+\end{center}
+
+
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[h]
+	\begin{tabular}{|l|l|l|l}
+		\cline{1-1} \cline{3-3}
+		\multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Повернення грошей на початку \\ періоду від інвестицій,\\зроблених у попередньому \\ періоді\end{tabular}} &   & \multirow{4}{*}{\begin{tabular}[c]{@{}l@{}}Вилучення готівки на початку \\ періоду з відкладеного фонду \\ за графіком контракту\end{tabular}} &   \\
+		& + &                                                                                                                                                & = \\
+		&   &                                                                                                                                                &   \\
+		&   &                                                                                                                                                &   \\ \cline{1-1} \cline{3-3}
+	\end{tabular}
+\end{table}
+
+
+
+
+\begin{table}[h]
+	\begin{tabular}{l|l|l|l|}
+		\cline{2-2} \cline{4-4}
+		& \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Вкладення грошей на початку \\ періоду за контрактом \\ відповідно до графіка\end{tabular}} &   & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Вкладення грошей в \\ інвестиції на початку \\ періоду\end{tabular}} \\
+		= &                                                                                                                                        & + &                                                                                                                 \\
+		&                                                                                                                                        &   &                                                                                                                 \\ \cline{2-2} \cline{4-4} 
+	\end{tabular}
+\end{table}
+
+Нехай
+
+\(I\) - розмір цільового фонду,
+
+\(A_i\) - розмір внеску типу А в місяці \(i\),
+
+\(B_i\) - розмір внеску типу В у місяці \(i\),
+
+\(C_i\) - розмір вкладу типу С у місяці \(i\),
+
+\(D_i\) - розмір внеску типу Д у місяці \(i\).
+
+Система обмежень:
+
+\(I-A_1-B_1-C_1-D_1=0\),
+
+\(1,015A_1-A_2=0\),
+
+\(1,015A_2+1,035B_1-A_3-B_3=150000\),
+
+\(1,015A_3+1,605C_1-A_4-C_4=0\),
+
+\(1,015A_4+1,035B_3-A_5-B_5=10\),
+
+\(1,015A_5-A_6=0\),
+
+\(1,015A_6+1,035B_5+1,060C_4+1,110D_1=600000\),
+
+
+\textit{Урахування ризику.}
+Розробляючи стратегію вкладів, П. Датський виходить з того, що протягом кожного місяця, сердній індекс ризику інвестованих фондів не повинен перевищувати 6. Індекс ризику за вкладами вказано в такій таблиці:
+\pagebreak
+
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|l|c|l|c|}
+		\hline
+		\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Можливі\\ інвестиції\end{tabular}} & \multirow{2}{*}{Можливі на початку}                                                                     & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}На скільки\\ місяців\end{tabular}} & \multirow{2}{*}{Процент} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Індекс\\ ризику\end{tabular}} \\
+		&                                                                                                         &                                                                               &                                                                &                                                                          \\ \hline
+		\begin{tabular}[c]{@{}c@{}}A\\ B\\ C\\ D\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}місяці 1, 2, 3, 4 ,5 і 6\\ місяці 1, 3, і 5\\ місяці 1 і 4\\ місяці 1\end{tabular} & \begin{tabular}[c]{@{}c@{}}1\\ 2\\ 3\\ 6\end{tabular}                         & \begin{tabular}[c]{@{}l@{}}1,5\\ 3,5\\ 6,0\\ 11,0\end{tabular} & \begin{tabular}[c]{@{}c@{}}1\\ 4\\ 9\\ 7\end{tabular}                    \\ \hline
+	\end{tabular}
+\end{table}
+
+Обмеження, що враховує ризик вкладів, здійснених у місяці 1, може бути записано наступним чином:
+\[
+A_1+4B_1+9C_1+7D_1\le 6(A_1+B_1+C_1+D_1).
+\]
+Після перетворення, система обмежень, що враховують ризик, має наступний вигляд:
+\[
+5A_1-2B_1+3C_1+1D_1\le0),
+\]
+\[
+5A_2-2B_1+3C_1+1D_1\le0),
+\]
+\[
+5A_3-2B_3+3C_1+1D_1\le0),
+\]
+\[
+5A_4-2B_3+3C_4+1D_1\le0),
+\]
+\[
+5A_5-2B_5+3C_4+1D_1\le0),
+\]
+\[
+5A_6-2B_5+3C_4+1D_1\le0),
+\]
+
+
+\textit{Облік тривалості погашення влкадів}
+На початку кожного місяця (після того, як зроблені нові інвестиції) середня тривалість погашення інвестованих коштів не повинна перевищувати 2,5 місяці.
+
+Обмеження, що враховує середню тривалість вкладів, що здійснюються в місяці 1, може бути записано наступним чином:
+\[
+A_1+2B_1+3C_1+6D_1\le 2.5(A_1+B_1+C_1+D_1).
+\]
+\pagebreak
+
+Після перетворення, система обмежень, що враховують ризик, має наступний вигляд:
+\[
+-1,5A_1-0,5B_1+0,5C_1+3,5D_1\le0),
+\]
+\[
+-1,5A_2-1,5B_1-0,5C_1+2,5D_1\le0),
+\]
+\[
+-1,5A_3-0,5B_1-1,5C_1+1,5D_1\le0),
+\]
+\[
+-1,5A_4-1,5B_1+0,5C_1+0,5D_1\le0),
+\]
+\[
+-1,5A_5-0,5B_1-0,5C_1-0,5D_1\le0),
+\]
+\[
+-1,5A_6-1,5B_1-1,5C_1-1,5D_1\le0).
+\]
+\end{document}

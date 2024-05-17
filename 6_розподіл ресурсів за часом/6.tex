@@ -1,0 +1,178 @@
+\documentclass[a5paper,10pt,intlimits,twoside,nohref]{vpcku}
+\usepackage{amsmath,amssymb,amsthm,delarray,enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{a4wide}
+\usepackage{amsopn}
+%\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{letterspace}
+
+% Correct Russian hyphenation
+\frenchspacing \righthyphenmin=2 \lefthyphenmin=2
+
+\allowdisplaybreaks
+\everymath{\displaystyle}
+
+\DeclareMathOperator*{\limit}{l.i.m.}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\spo}{sp}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathsf{E}}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\F}{\mathscr{F}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\Er}{\mathrm{E}}
+\newcommand{\Sub}{\mathrm{Sub}}
+
+\newtheorem{teo}{Теорема}%[section]
+\newtheorem{lem}{Лема}%[section]
+\newtheorem{coll}{Наслідок}%[section]
+\theoremstyle{definition}
+\newtheorem{defin}{Означення}%[section]
+\newtheorem{exa}{Приклад}%[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Зауваження}%[section]
+
+\renewcommand{\baselinestretch}{1.3}
+
+%\hfuzz7pt \voffset-1cm \hoffset-3cm \topmargin.4cm
+
+\numberwithin{equation}{section}
+\renewcommand{\thesection}{\arabic{section}}% zakommentirovat', esli nuzhno%
+\renewcommand{\theequation}{\arabic{equation}}
+%видаляє проблему з номером сторінки
+\makeatletter
+\renewcommand\chapter{
+                    \clearpage
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\begin{document}
+\renewcommand{\contentsname}{ЗМІСТ}
+{\pagestyle{empty} \tableofcontents} \pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyfoot[LE,RO]{\small \thepage} \fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+
+\newpage
+\chapter{Розподіл ресурсів за часом. Оптимальне регулювання запасів}
+\section{Задачі}
+
+\subsection{Задача №1}
+\textls{Постановка задачі.}
+Планується виробництво однорідного продукту для задоволення потреб, що змінюються з часом. Весь річний період розділено на \(n\) періодів. Потреби в продукті в \(i\)-му періоді складають \(b_i\). Також відомі витрати на виробництво додаткової одиниці продукту (\(a\) грн.) та на зберігання тієї ж самої одиниці протягом одного періоду (\(c\) грн.). Скласти оптимальний графік виробництва за періодами, мінімізуючи загальні витрати.
+
+
+\textls{Розв'язання.}
+Позначимо через \(x_i \ge 0\) виробництво за \(i\)-й період, а через \(u_i\) запаси, які формуються в кінці \(i\)-го періоду за рахунок перевищення накопиченого виробництва, починаючи з 1-го періоду до даного, над накопиченим витратами.
+
+Нехай на початку планованого періоду виробництво складає \(x_0\) одиниць.
+
+Середній розмір запасів, які зберігаються протягом \(i\)-го періоду, складе  \(1/2 (u_{i-1} +u_i)\). Тому витрати на зберігання протягом всього планованого періоду складуть
+\[
+	z_{xp}=\frac{c}{2}\sum_{i=1}^n (u_{i=1} +u_i).
+\]
+
+Введемо дві нові не від'ємні змінні \(y_i\) і \(z_i\) зі співвідношень:
+\[
+	x_i-x_{i-1}=y_i-z_i \quad (i=2,3,...,n).
+\]
+
+
+При цьому в оптимальному графіку виробництва можна \(y_i\) трактувати як величину, на яку відбулося розширення виробництва у \(i\)-му періоді, а \(z_i\) - відповідно як згортання виробництва. Виходячи з цього, сумарні додаткові витрати на розширення виробництва запишуться у вигляді
+
+\[
+	z_{p}=a\sum_{i=1}^n y_i,
+\]
+
+Таким чином, приходимо остаточно до такої моделі задачі лінійного програмування: мінімізувати функцію
+
+\begin{equation}
+	z=\frac{c}{2}\sum_{i=1}^n (u_{i-1} +u_i + a\sum_{i=1}^n y_i,
+\end{equation}
+при умовах:
+\begin{equation}
+	y_i \ge 0, \quad z_i \ge 0, \quad (i=1,2,...,n),
+\end{equation}
+\begin{equation}
+	x_i-x_{i-1}=y_i-y_{i-1} \quad (i=2,3,...,n),
+\end{equation}
+\begin{equation}
+	u_i=u_0+\sum_{i=1}^i x_i - \sum_{i=1}^i b_i \quad (i=1,2,...,n),
+\end{equation}
+\begin{equation}
+	u_i \ge 0 \quad (i=1,2,...,n).
+\end{equation}
+
+Модель можна спростити, виключивши з неї змінні \(x_i\). Для цього віднімемо з рівняння (16) аналогічне рівняння для \(i - 1\). Отримаємо
+\[
+(u_{i-1} +u_i) = \sum^i x_i - \sum^{i-1} x_i - \sum^{i} b_i + - \sum^{i-1} b_i = x_i - b_i.
+\]
+Аналогічно, очевидно, \(u_{i-1}-u_{i-2}=x_{i-1}-b_{i-1}\) звідки почленним відніманням із попередньої рівності отримуємо
+\[
+	x_i-x_{i-1}=u_i = 2u_{i-1}+u_{i-2}+b_i- b_{i-1}.
+\]
+Підставляючи цей вираз у ліву частину рівностей (15), запишемо їх у вигляді
+\begin{equation}
+	u_i-2u_{i-1}+u_{i-2}+b_i-b_{i-1}=y_i-z_i \quad (i=1,...,n).
+	\tag{3$\prime$}
+\end{equation}
+Подальше розв'язання задачі, описаної виразами (1),(2), (3$\prime$), (5), ведеться як зазвичай.
+
+\subsection{Задача №2}
+
+\textls{Постановка задачі.}
+Планується квартальний випуск продукції для задоволення змінного попиту \(b_1=50,b_2=3-,b_3=40,b_4=20\). Скласти оптимальний графік роботи підприємства, якщо витрати на додатковий випуск 1 одиниці продукції становлять 30 грн., а витрати на зберігання цієї ж одиниці в запасах протягом одного періоду - 3 грн. При цьому задано \(u_0=5\).
+
+\textls{Розв'язання.}
+Згідно з розглянутою вище загальною моделлю, позначимо відповідно випуски продукції в I, II, III і IV кварталах через \(x_1,x_2,x_3\) та \(x_4\), запаси продукції через \(u_1,u_2,u_3,u_4\), обсяг зростання виробництва в \(i\)-м кварталі через \(y_i\) і обсяг згортання через \(z_i\).
+
+Тоді вирази (1) - (14) набудуть такого конкретного вигляду: мінімізувати функцію
+\begin{equation}
+z=\frac{3}{2}(5+2u_2u_3+u_4)+30(y_2+y_3+y_4)
+	\tag{1$\prime$}
+\end{equation}
+при умовах
+\begin{equation}
+	\begin{cases}
+		u_2-2u_1+5-20=y_2-z_2 \\
+		u_3-2u_2+u_1+10=y_3-z_3 \\
+		u_4-2u_3+u_2-20=y_4-z_4 \\
+	\end{cases}
+	,
+	\tag{3$\prime$}
+\end{equation}
+\begin{equation}
+	u_i \ge 0 \quad (i=1,2,3,4).
+	\tag{5$\prime$}
+\end{equation}
+
+Розв'язання цієї задачі за допомогою симплексних таблиць дає наступний результат
+\[
+	u_2=5, \quad u_4=15, \quad z_2=10, \quad u_1=u_3=y_2=y_3=y_4=z_2=z_4=0
+\]
+та
+\begin{center}
+	\(z_{\min}=45\) грн.	
+\end{center}
+
+За допомогою рівностей (3) і (4) визначаємо значення \(x_i\): 
+\[
+	x_1=b_1+u_1-u_0=45; \quad x_2=x_1-z_2=35; \quad x_3=x_2=35; \quad x_4=x_3=35.
+\]
+
+
+\end{document}

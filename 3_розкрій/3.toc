@@ -1,0 +1,6 @@
+\babel@toc {ukrainian}{}\relax 
+\contentsline {chapter}{\@chapapp \ \hbox to\@tempdima {1.\hfil }\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyro } \IeC {\guillemetleft }\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrz }\IeC {\cyrk }\IeC {\cyrr }\IeC {\cyrii }\IeC {\cyrishrt }\IeC {\guillemetright }}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.}\IeC {\CYRO }\IeC {\cyrp }\IeC {\cyrt }\IeC {\cyri }\IeC {\cyrm }\IeC {\cyra }\IeC {\cyrl }\IeC {\cyrsftsn }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrishrt } \IeC {\cyrr }\IeC {\cyro }\IeC {\cyrz }\IeC {\cyrk }\IeC {\cyrr }\IeC {\cyrii }\IeC {\cyrishrt }}{2}{section.1.1}%
+\contentsline {section}{\numberline {2.}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyrii } \IeC {\cyrp }\IeC {\cyrr }\IeC {\cyro } ``\IeC {\cyrr }\IeC {\cyro }\IeC {\cyrz }\IeC {\cyrk }\IeC {\cyrr }\IeC {\cyrii }\IeC {\cyrishrt }''}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {2.1.}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\textnumero }1}{5}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {2.2.}\IeC {\CYRZ }\IeC {\cyra }\IeC {\cyrd }\IeC {\cyra }\IeC {\cyrch }\IeC {\cyra } \IeC {\textnumero }2}{6}{subsection.1.2.2}%

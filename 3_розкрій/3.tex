@@ -1,0 +1,284 @@
+\documentclass[a5paper,10pt,intlimits,twoside,nohref]{vpcku}
+\usepackage{amsmath,amssymb,amsthm,delarray,enumerate}
+\usepackage[mathscr]{eucal}
+%\usepackage{a4wide}
+\usepackage{amsopn}
+%\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[ukrainian]{babel}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{letterspace}
+
+% Correct Russian hyphenation
+\frenchspacing \righthyphenmin=2 \lefthyphenmin=2
+
+\allowdisplaybreaks
+\everymath{\displaystyle}
+
+\DeclareMathOperator*{\limit}{l.i.m.}
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\spo}{sp}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\E}{\mathsf{E}}
+\renewcommand{\P}{\mathrm{P}}
+\newcommand{\F}{\mathscr{F}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\Exp}{\mathrm{Exp}}
+\newcommand{\Er}{\mathrm{E}}
+\newcommand{\Sub}{\mathrm{Sub}}
+
+\newtheorem{teo}{Теорема}%[section]
+\newtheorem{lem}{Лема}%[section]
+\newtheorem{coll}{Наслідок}%[section]
+\theoremstyle{definition}
+\newtheorem{defin}{Означення}%[section]
+\newtheorem{exa}{Приклад}%[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Зауваження}%[section]
+
+\renewcommand{\baselinestretch}{1.3}
+
+%\hfuzz7pt \voffset-1cm \hoffset-3cm \topmargin.4cm
+
+\numberwithin{equation}{section}
+\renewcommand{\thesection}{\arabic{section}}% zakommentirovat', esli nuzhno%
+\renewcommand{\theequation}{\arabic{equation}}
+%видаляє проблему з номером сторінки
+\makeatletter
+\renewcommand\chapter{
+                    \clearpage
+                    \global\@topnum\z@
+                    \@afterindentfalse
+                    \secdef\@chapter\@schapter}
+
+\begin{document}
+\renewcommand{\contentsname}{ЗМІСТ}
+{\pagestyle{empty} \tableofcontents} \pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyfoot[LE,RO]{\small \thepage} \fancyfoot[C]{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+
+
+
+\newpage
+\chapter{Задача про «розкрій»}
+\section{Оптимальний розкрій}
+
+
+Більшість матеріалів, що використовують у промисловості, поступає на виробництво у вигляді стандартних форм. Безпосереднє використання таких матеріалів, як правило крупних розмірів, зазвичай неможливе. Попередні їх треба розділити на заготовки необхідних розмірів. При цьому виникає необхідність вибору способу розкрою та інтенсивності його застосування. Задачі такого типу, що називаються задачами оптимального розкрою матеріалів, виникають у металургії, лісній та лісопереробній, легкій промисловості та інших галузях, та використовуються по відношення до технологічних процесів, де велика варіативність дозволяє досягнути значного ефекту завдяки оптимізації.
+
+У розробці плану розкрію тісно переплітаються дві задачі.
+
+1) вибір раціональних способів розкрою одиниці матеріала;
+
+2) визначення інтенсивності використання раціональних способів розкрою в залежності від заданої комплектності вироблених деталей.
+
+\textit{Раціональний варінт розкрою.} У задачах оптимального розкрою розглядаються так звані раціональні (парето-оптимальні) способи розкрою, тобто такі, для яких збільшення кількості заготовок будь-якого типу можливе тільки за рахунок скорочення числа заготовок якого-небудь іншого типу.
+
+\textit{Приклад 1.} Необхідно визначити всі раціональні способи розкрою металевого стержня довжиною 100см на заготовки трьох типів довжиною 20,30 і 50 см.
+
+\pagebreak
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\multirow{2}{*}{Способи} & \multicolumn{3}{|c|}{Заготовки} & \multirow{2}{*}{Відходи} \\
+		\cline{2-4} 
+		& А=50 & В=30 & С=20 & \\
+		\hline
+		1 & 2 & 0 & 0 & 0 \\
+		\hline
+		2 & 1 & 1 & 1 & 0 \\
+		\hline
+		3 & 1 & 0 & 2 & 10 \\
+		\hline
+		4 & 0 & 3 & 0 & 10 \\
+		\hline
+		5 & 0 & 2 & 2 & 0 \\
+		\hline
+		6 & 0 & 1 & 3 & 10 \\
+		\hline
+		7 & 0 & 0 & 5 & 0 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+Таким чином, у даному випадку існує сім різних раціональних способів розкрою.
+
+
+
+\begin{center}
+	\textit{Визначення інтенсивності використання варіанта розкрою.}
+\end{center}
+
+Позначення:
+
+\(j\) — індекс типу матеріалів що постачають, \(j=1,2,...,s;\);
+
+\(i\) — індекс способу розкрою \(j=1,2,...,s;\);
+
+\(b_k\) — кількість заготовок виду \(k\) у комплекті, \(j=1,2,...,s;\);
+
+\(a_{ijk}\) — кількість заготовок виду \(k\), отриманих при розкрої одиниці матеріала \(j\)-го типу \(i\)-м способом;
+
+\(d_j\) — кількість поступившого матеріала \(j\)-го виду;
+
+\(x_{ij}\) — кількість одиниць \(j\)-го матеріалу, розкроюваних \(i\)-м способом (інтенсивність використання способу) 
+
+\(c_{ij}\) — величина відходів, отриманих при розкрої одиниці матеріалу \(j\)-го типу \(i\)-м способом;
+
+\(y\) — число комплектів заготовок різного типу.
+
+\pagebreak
+Модель.
+\begin{equation}
+	y \rightarrow \max,
+\end{equation}
+
+\begin{equation}
+	x_{ij} \ge 0,\quad i = 1,...,p \quad j=1,...,s,
+\end{equation}
+
+\begin{equation}
+	\sum_{i=1}^{p} x_{ij} \le d_j,\quad j=1,...,s,
+\end{equation}
+
+\begin{equation}
+	\sum_{j=1}^s\sum_{i=1}^p x_{ij} a_{ijk} \le b_k y, \quad k=1,...q,
+\end{equation}
+
+\vspace{\baselineskip}
+
+(1) — цільова функція — максимум комплектів виготовлених виробів,
+
+(2) — невід'ємність змінних;
+
+(3) — врахування обмеженості ресурсів;
+
+(4) —врахування виконання плана.
+
+Цільова функція в залежності від умови задачі може записуватися і в іншому вигляді.
+
+Наприклад, якщо знадобиться виробляти не максимум комплектів, а просто максимум деталей, то цільова функція запишеться у наступному вигляді.
+
+\[
+\sum_{k=1}^q\sum_{j=1}^q\sum_{i=1}^p x_{ij} a_{ijk} \rightarrow \max,
+\]
+а рівність (3) виключиться із умови.
+
+Якщо знадобиться орієнтувати виробництво на мінімум відходів, то функцонал буде виглядати наступним чином:
+
+\[
+	\sum_{j=1}^s\sum_{i=1}^p c_{ij} x_{ij} \rightarrow \min.
+\]
+
+%_______________________________
+\pagebreak
+% \subsection{Дії над векторами}
+
+\section{Задачі про ``розкрій''}
+
+\subsection{Задача №1}
+\textls{Постановка задачі.}
+На розкрій (розпил, обробку) поступає \(s\) різних матеріалів. Необхідно виготовити з ниг й різних виробів у кількості, пропорційній числам \(b_1,b_2,..,b_k,...,b_q\).
+
+Кожна одиниця \(j\)-го матеріала (\(j=1,2,...,s\)) може бут розкроєна \(p\) різними способами, при цьому використання \(i\)-го способа (\(i=1,2,...,p\)) дає \(a_{ik}^j\) одиниць \(k\)-x виробів.
+
+Знайти план розпилу, що забезпечує максимальну кількість комплектів, якщо матеріалів \(j\)-го виду поступає \(a^{\prime}\) одиниць.
+
+\textls{Розв'язання.}
+Позначимо через \(x_i^j\) кількість одиниць \(j\)-го матеріалу, що розкроюють по \(i\)-му способу (вього таких змінних буде \(p \cdot s\)). Змінні \(x_i^j\), очевидно, мають задовольняти обмеженням:
+
+
+\begin{equation}
+	x_j^i \ge 0 \quad (i=1,2,...,p та j=1,2,...s),
+\end{equation}
+
+\begin{equation}
+	\sum_{i=1}^p x_i^j = a^j (j=1,2,...,s),
+\end{equation}
+
+\begin{equation}
+	\sum_{j=1}^s\sum_{i=1}^p x_i^j a_{ik}^j = b_k x (k=1,2,...,q)
+\end{equation}
+
+де \(x\) - число комплектыв виготовлених виробів.
+
+Задача заключається в максимізації \(z=x\) при умовах (7), (8), та (9).
+
+Подальше розв'язання задачі проводиться симплексним методом. В окремому випадку, коли на обробку поступає матеріал тільки одного зразка (тобто \(s=1\)), у кількості \(a\) одиниць, модель приймає більш простий вигляд: максимізувати \(z=x\) при умовах: 
+
+\begin{equation}
+	x_i \ge 0 \quad (i=1,2,...,p).
+	\tag{1$\prime$}
+\end{equation}
+
+\begin{equation}
+	\sum_i x_i = a.
+	\tag{2$\prime$}
+\end{equation}
+\begin{equation}
+	\sum_{i=1} a_{ik} x_i \quad (k=1,2,...,q)
+	\tag{3$\prime$}
+\end{equation}
+
+\vspace{\baselineskip}
+\subsection{Задача №2}
+
+\textls{Постановка задачі.}
+Для виготовлення брусів трьох розмірів: 0,6 м, 1,5 м і 2,5 м у співвідношенні 2:1:3 на розпил надходять колоди завдовжки 3 м. Визначити план розпилу, що забезпечує максимальну кількість комплектів.
+
+\textls{Розв'язання.}
+Насамперед визначимо різноманітні способи розпилу колод, вказавши скільки відповідних брусів при цьому виходить.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Способи\\ розпилу (і)\end{tabular}} & \multicolumn{3}{l|}{\multirow{2}{*}{Отримані бруси}}                                                                                                                   & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Кількість колод,\\ розпиляних по\\ і-му сособі\end{tabular}} \\
+		& \multicolumn{3}{l|}{}                                                                                                                                                  &                                                                                                         \\ \cline{2-4}
+		& 0.6                                                   & 1.5                                                   & 2.5                                                   &                                                                                                         \\ \hline
+		\begin{tabular}[c]{@{}l@{}}1\\ 2\\ 3\\ 4\end{tabular}                          & \begin{tabular}[c]{@{}l@{}}5\\ 2\\ -\\ -\end{tabular} & \begin{tabular}[c]{@{}l@{}}-\\ 1\\ 2\\ -\end{tabular} & \begin{tabular}[c]{@{}l@{}}-\\ -\\ -\\ 1\end{tabular} & \begin{tabular}[c]{@{}l@{}} \(x_1\)\\ \(x_2\)\\ \(x_3\)\\ \(x_4\)\end{tabular}                                               \\ \hline
+	\end{tabular}
+\end{table}
+
+Тепер складаємо математичну модель, прийнявши, що все надходить на розпил  \(\alpha\) колод: максимізувати кількість комплектів  \(z=x\) за умов, що всі колоди повинні бути розпиляні  \(x_1+x_2+x_3+x_4=\alpha\) і що кількість брусів кожного розміру має задовольняти умову комплектності
+
+\[
+5x_1+2x_2=2x; \quad x_2+2x_3=1\cdot x; \quad x_4=3x.
+\]
+\pagebreak
+З останньої рівності, визначивши \(x=\frac{1}{3}x_4(\max),\) і виключивши \(x\) з решти виразів, прийдемо остаточно до наступного завдання:
+
+
+\[
+	z=\frac{1}{3}x_4(\max),
+\]
+
+
+\[
+\begin{cases}
+	x_1+x_2+x_3+x_4=\alpha \\
+	5x_1+2x_2-\frac{2}{3}x_4=0 \\
+	x_1+x_2+x_3+x_4=\alpha \\
+	x_2+2x_3-\frac{1}{3}x_4=0\\
+\end{cases}
+\]
+
+\[
+	x_1\ge0,\quad x_2 \ge0,\quad x_3 \ge0,\quad x_4 \ge0.
+\]
+
+Після вирішення її симплексним методом отримаємо оптимальне вирішення задачі \(x_{опт} = (4/39, 5/39, 0, 10/13)\) та\(z_{max} = 10/39\). Таким чином, 10,2\% загальної кількості колод, що надходять слід розпилювати за 1-м способом, 12,8\% - за 2-м способом і 77\% - по 3-му способу; 4-й спосіб розпилу застосовувати не слід.
+
+\end{document}
